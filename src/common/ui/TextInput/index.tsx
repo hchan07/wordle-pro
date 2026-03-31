@@ -14,7 +14,8 @@ type IconProps<Side extends 'left' | 'right'> =
      Partial<Record<`${Side}AriaLabel`, never>>);
 
 export type TextInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> & {
-  type: 'email' | 'password' | 'search' | 'text' | 'url'  
+  type: 'email' | 'password' | 'search' | 'text' | 'url',
+  name: string,  
 } & IconProps<'left'> & IconProps<'right'>
 
 const INPUT_BASE_CLASSES = clsx(
@@ -26,20 +27,27 @@ const INPUT_BASE_CLASSES = clsx(
   'border border-zinc-700',
   
   // Border States (Interactive)
-  'focus:border-correct focus:ring-1 focus:ring-correct',
-  'active:border-correct focus-within:border-correct'
+  'focus:border-white focus:ring-1 focus:ring-white',
+  'active:border-white focus-within:border-white'
 );
     
-
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
   ({ className, leftIconName, rightIconName, onLeftIconClick, onRightIconClick, leftAriaLabel, rightAriaLabel, ...props }, ref) => {
+    const baseIconClassNames = clsx(
+      'absolute', 
+      'top-1/2', 
+      '-translate-y-1/2'
+    );
+
     const leftIconClassNames = clsx(
-      'absolute inset-y-0 flex items-center left-4 text-gray-400', 
+      baseIconClassNames,
+      'left-4', 
       onLeftIconClick && 'cursor-pointer hover:text-gray-300'
     )
 
     const rightIconClassNames = clsx(
-      'absolute inset-y-0 flex items-center right-4 text-gray-400', 
+      baseIconClassNames,
+      'right-4', 
       onRightIconClick && 'cursor-pointer hover:text-gray-300'
     )
 
@@ -49,8 +57,8 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
     rightIconName ? 'pr-12' : 'pr-4',
   );
 
-    const LeftWrapper = onLeftIconClick ? 'button' : 'div';
-    const RightWrapper = onRightIconClick ? 'button' : 'div';
+    const LeftWrapper = onLeftIconClick ? 'button' : 'span';
+    const RightWrapper = onRightIconClick ? 'button' : 'span';
 
     
     return (
@@ -77,6 +85,6 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
   }
 )
 
-TextInput.displayName = "TextInput"
+TextInput.displayName = 'TextInput';
 
 export default TextInput;
