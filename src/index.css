@@ -2,12 +2,10 @@
 @import "tailwindcss";
 
 /* If you have custom Wordle colors, define them here */
-@theme {
-  /* This is where your Inter font lives now! */
+@theme { 
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
-
-  /* You can also define your Wordle colors here */
-  --color-correct: #6aaa64;
-  --color-present: #c9b458;
-  --color-absent: #787c7e;
+  
+  --color-correct: #538d4e;
+  --color-present: #b59f3b;
+  --color-absent: #3a3a3c;
 }
