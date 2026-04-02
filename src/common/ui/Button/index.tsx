@@ -1,5 +1,6 @@
 import cn from "@/common/utils/cn";
 import { cva } from "class-variance-authority";
+import { LoaderCircle } from 'lucide-react';
 
 const buttonVariants = cva([
 		'text-white',
@@ -10,7 +11,6 @@ const buttonVariants = cva([
     'font-semibold', 
     'transition-all',
     'disabled:opacity-50', 
-    'cursor-pointer', 
     'py-3',
 
     // --- Focus Logic ---
@@ -60,15 +60,16 @@ const Button = ({
 	disabled,
 	...props
 } : ButtonProps) => {
-	const className = cn(buttonVariants({variant, size}));
+	const notActionable = isLoading || disabled;
 
+	const className = cn(buttonVariants({variant, size}), notActionable && 'pointer-events-none');
 	return (
 		<button 
 			type={type}
 			className={className}
-			disabled={disabled || isLoading}			
+			disabled={notActionable}
 			{...props}
-		>{children}</button>
+		>{ isLoading ? <LoaderCircle className="justify-self-center animate-spin" size={24} /> : children }</button>
 	)
 }
 
