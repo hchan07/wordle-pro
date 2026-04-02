@@ -1,9 +1,12 @@
 import Button from "@/common/ui/Button";
+import Card from "@/common/ui/Card";
 import TextInput from "@/common/ui/TextInput";
 
 const Login = () => {
 	return (
-		<div className="m-10 bg-black gap-2 flex flex-col p-2">
+		<div className="p-4">
+		<Card>
+			<div className="gap-3 flex flex-col">
 			<Button>
 					hello world
 			</Button>
@@ -24,6 +27,8 @@ const Login = () => {
 			<TextInput labelPos="right" label="test label" value="test" type="text" leftIconName="search" name="search" color="green" rightIconName="eye" onRightIconClick={() => console.log('test')} rightAriaLabel="test"/>
 			<TextInput labelPos="left" label="test label" value="test" type="text" leftIconName="search" name="search" color="green" rightIconName="eye" onRightIconClick={() => console.log('test')} rightAriaLabel="test"/>
 			<TextInput labelPos="hidden" label="test label" value="test" type="text" leftIconName="search" name="search" color="green" rightIconName="eye" onRightIconClick={() => console.log('test')} rightAriaLabel="test"/>
+				</div>
+		</Card>
 		</div>
 	)
 };
