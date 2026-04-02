@@ -12,9 +12,18 @@ const Login = () => {
 			</Button>			
 			<Button variant="ghost">
 					hello world
-			</Button>			
+			</Button>
+			<Button isLoading={true}>
+					hello world
+			</Button>	
+			<Button disabled={true}>
+					hello world
+			</Button>										
 			<div className="text-white"><Button variant="link"><span className="text-correct">test link</span></Button> should not wrap</div>
-			<TextInput value="test" type="text" leftIconName="search" name="search" color="green" rightIconName="eye" onRightIconClick={() => console.log('test')} rightAriaLabel="test"/>
+			<TextInput label="test label" value="test" type="text" leftIconName="search" name="search" color="green" rightIconName="eye" onRightIconClick={() => console.log('test')} rightAriaLabel="test"/>
+			<TextInput labelPos="right" label="test label" value="test" type="text" leftIconName="search" name="search" color="green" rightIconName="eye" onRightIconClick={() => console.log('test')} rightAriaLabel="test"/>
+			<TextInput labelPos="left" label="test label" value="test" type="text" leftIconName="search" name="search" color="green" rightIconName="eye" onRightIconClick={() => console.log('test')} rightAriaLabel="test"/>
+			<TextInput labelPos="hidden" label="test label" value="test" type="text" leftIconName="search" name="search" color="green" rightIconName="eye" onRightIconClick={() => console.log('test')} rightAriaLabel="test"/>
 		</div>
 	)
 };

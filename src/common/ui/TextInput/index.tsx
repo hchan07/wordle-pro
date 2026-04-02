@@ -1,6 +1,8 @@
-import { forwardRef, type InputHTMLAttributes } from 'react'
+import { forwardRef, useId, type InputHTMLAttributes } from 'react';
 import { DynamicIcon, type IconName } from 'lucide-react/dynamic';
 import  clsx from 'clsx';
+import { cva } from 'class-variance-authority';
+import cn from '@/common/utils/cn';
 
 type IconProps<Side extends 'left' | 'right'> = 
   | (Record<`${Side}IconName`, IconName> & 
@@ -15,7 +17,10 @@ type IconProps<Side extends 'left' | 'right'> =
 
 export type TextInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> & {
   type: 'email' | 'password' | 'search' | 'text' | 'url',
-  name: string,  
+  name: string,
+  label: string,
+  labelPos?: 'top' | 'right' | 'left' | 'hidden',
+  id?: string  
 } & IconProps<'left'> & IconProps<'right'>
 
 const INPUT_BASE_CLASSES = clsx(
@@ -30,26 +35,53 @@ const INPUT_BASE_CLASSES = clsx(
   'focus:border-white focus:ring-1 focus:ring-white',
   'active:border-white focus-within:border-white'
 );
-    
+
+const labelPosVariants = cva('flex', {
+  variants: {
+    labelPos: {
+      top: 'flex-col gap-1.5',
+      left: 'flex-row items-center gap-4',
+      hidden: 'flex-col',
+      right: 'flex-row-reverse items-center gap-4'
+    },
+  },
+  defaultVariants: {
+    labelPos: 'top',
+  },
+});
+
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
-  ({ className, leftIconName, rightIconName, onLeftIconClick, onRightIconClick, leftAriaLabel, rightAriaLabel, ...props }, ref) => {
+  ({
+    id,
+    className, 
+    label,
+    labelPos,
+    leftIconName, 
+    rightIconName, 
+    onLeftIconClick, 
+    onRightIconClick, 
+    leftAriaLabel, 
+    rightAriaLabel, 
+    ...props 
+  }, ref) => {
     const baseIconClassNames = clsx(
       'absolute', 
       'top-1/2', 
-      '-translate-y-1/2'
+      '-translate-y-1/2',
+      'text-white'
     );
 
     const leftIconClassNames = clsx(
       baseIconClassNames,
       'left-4', 
-      onLeftIconClick && 'cursor-pointer hover:text-gray-300'
+      onLeftIconClick && 'hover:text-gray-300'
     )
 
     const rightIconClassNames = clsx(
       baseIconClassNames,
       'right-4', 
-      onRightIconClick && 'cursor-pointer hover:text-gray-300'
-    )
+      onRightIconClick && 'hover:text-gray-300'
+    );    
 
   const inputClassNames = clsx(
     INPUT_BASE_CLASSES,
@@ -60,26 +92,45 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
     const LeftWrapper = onLeftIconClick ? 'button' : 'span';
     const RightWrapper = onRightIconClick ? 'button' : 'span';
 
+    const labelClassNames = clsx(
+      'text-white',
+      'w-fit',
+      'whitespace-nowrap',
+      labelPos === 'hidden' ? 'sr-only' : 'text-sm'
+    );
+
+    const containerClassnames = cn(
+      'w-full',
+      labelPosVariants({labelPos})
+    );
+
+    const fieldId = id ?? useId();
+    
     
     return (
-      <div className="relative w-full">
-        {leftIconName && (
-          <LeftWrapper className={leftIconClassNames} onClick={onLeftIconClick} aria-label={leftAriaLabel}>          
-            <DynamicIcon name={leftIconName} size={24} />          
-          </LeftWrapper>
-        )}
+      <div className={containerClassnames}>
+        <label htmlFor={fieldId} className={labelClassNames}>{label}</label>
+        <div className="relative w-full">
+          {leftIconName && (
+            <LeftWrapper className={leftIconClassNames} onClick={onLeftIconClick} aria-label={leftAriaLabel}>          
+              <DynamicIcon name={leftIconName} size={24} />          
+            </LeftWrapper>
+          )}
 
-        <input
-          className={inputClassNames}
-          ref={ref}
-          {...props}
-        />
+          <input
+            {...props}
+            name={label}
+            id={fieldId}
+            className={inputClassNames}
+            ref={ref}            
+          />
 
-        {rightIconName && (
-          <RightWrapper className={rightIconClassNames} onClick={onRightIconClick} aria-label={rightAriaLabel}>
-            <DynamicIcon name={rightIconName} size={24}  />          
-          </RightWrapper>
-        )}
+          {rightIconName && (
+            <RightWrapper className={rightIconClassNames} onClick={onRightIconClick} aria-label={rightAriaLabel}>
+              <DynamicIcon name={rightIconName} size={24} />
+            </RightWrapper>
+          )}
+        </div>
       </div>
     )
   }
