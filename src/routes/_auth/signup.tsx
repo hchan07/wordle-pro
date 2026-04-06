@@ -1,9 +1,10 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_auth/signup')({
-  component: RouteComponent,
+  component: () => {
+    return (
+      <div>Hello "/_auth/signup"!</div>
+    );
+  },
 })
 
-function RouteComponent() {
-  return <div>Hello "/_auth/signup"!</div>
-}

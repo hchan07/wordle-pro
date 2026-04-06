@@ -6,7 +6,7 @@ const Card = ({
 	children: ReactNode
 }) => {
 	return (
-		<div className="rounded-xl border border-gray-500 p-8">
+		<div className="bg-neutral-900 rounded-xl border border-gray-500 p-8">
 			{children}
 		</div>
 	)
