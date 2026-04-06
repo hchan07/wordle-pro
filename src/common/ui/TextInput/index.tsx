@@ -53,7 +53,6 @@ const labelPosVariants = cva('flex', {
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
   ({
     id,
-    className, 
     label,
     labelPos,
     leftIconName, 
@@ -104,7 +103,8 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       labelPosVariants({labelPos})
     );
 
-    const fieldId = id ?? useId();
+    const reactId = useId();
+    const fieldId = id ?? reactId;
     
     
     return (

@@ -1,8 +1,7 @@
-<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="64" height="64" rx="12" fill="#6AAA64"/>
-  
-  <path d="M12 20H19L24 40L29 20H35L40 40L45 20H52L43 48H36L32 32L28 48H21L12 20Z" fill="white"/>
-  
-  <rect x="34" y="44" width="24" height="12" rx="4" fill="#3A3A3C"/>
-  <text x="37" y="53" fill="white" style="font-family: Arial, sans-serif; font-weight: bold; font-size: 8px;">PRO</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="12" fill="#000"/>
+
+    <text x="4" y="53" fill="#538d4e" style="font-family:Arial,sans-serif;font-weight:700;font-size:56px">W</text>
+  <rect x="38" y="50" width="22" height="10" rx="4" fill="#3a3a3c"/>
+  <text x="40" y="58" fill="#fff" style="font-family:Arial,sans-serif;font-weight:700;font-size:8px">PRO</text>
 </svg>
