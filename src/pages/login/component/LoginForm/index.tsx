@@ -1,8 +1,12 @@
-import LoginForm from "./LoginForm";
+import LoginForm from './LoginForm';
+import useLoginForm  from './useLoginForm';
+
 
 const LoginFormContainer = () => {
+	const form =  useLoginForm();
+
 	return (		
-		<LoginForm />		
+		<LoginForm form={form}/>
 	);
 };
 
