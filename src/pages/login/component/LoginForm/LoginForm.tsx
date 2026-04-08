@@ -80,8 +80,9 @@ const LoginForm = ({ form }: LoginFormProp) => {
 							);
 					}} />								
 			</div>
-			<div className="text-gray-400 text-sm text-center">Don't have an account? <Link to="/signup"><span className="text-correct text-sm inline-block">Create account</span></Link></div>
+			
 			</form>
+			<div className="text-gray-400 text-sm text-center">Don't have an account? <Link to="/signup"><span className="text-correct text-sm inline-block">Create account</span></Link></div>
 		</Card>
 	);
 };
